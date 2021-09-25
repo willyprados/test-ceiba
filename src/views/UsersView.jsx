@@ -5,3 +5,7 @@
 // Etiquetas de imagen con el avatar de cada usuario  data-testid=“user__img-" concatenado con el id de cada usuario.
 // botón que redirecciona a la vista de crear nuevo usuario  data-testid="users__btn-create"
 // un botón por cada página con el número de la página como texto data-testid="users__btn-page-" concatenado con el número de la página
+
+export default function UsersView() {
+  return <h1>Hola desde UsersView</h1>;
+}

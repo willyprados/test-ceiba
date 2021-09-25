@@ -4,3 +4,7 @@
 // Input de trabajo=“create__job”
 // Span que alerta con notificaciones=“alert__text”
 // Botón para crear= “create__btn”
+
+export default function CreateUserView() {
+  return <h1>Hola desde CreateUserView</h1>;
+}

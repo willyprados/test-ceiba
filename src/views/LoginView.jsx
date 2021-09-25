@@ -5,3 +5,7 @@
 // Input de contraseña  data-testid=“login__password”
 // Botón para ingresar data-testid=“login__btn-login”
 // Span que alerta con notificaciones  data-testid==“alert__text”
+
+export default function LoginView() {
+  return <h1>Hola desde LoginView</h1>;
+}
