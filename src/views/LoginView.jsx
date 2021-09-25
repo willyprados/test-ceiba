@@ -6,6 +6,13 @@
 // Botón para ingresar data-testid=“login__btn-login”
 // Span que alerta con notificaciones  data-testid==“alert__text”
 
+import FormLogin from "../components/FormLogin";
+
 export default function LoginView() {
-  return <h1>Hola desde LoginView</h1>;
+  return (
+    <>
+      <h1>Hola desde LoginView</h1>;
+      <FormLogin />
+    </>
+  );
 }

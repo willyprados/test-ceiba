@@ -1,11 +1,14 @@
-import React from "react";
+import { useState } from "react";
 
 import { CssBaseline } from "@mui/material";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import ButtonAppBar from "./components/ButtonAppBar";
-import FormLogin from "./components/FormLogin";
-import FormSignUp from "./components/FormSignUp";
 import CreateUserView from "./views/CreateUserView";
 import UsersView from "./views/UsersView";
 import LoginView from "./views/LoginView";
@@ -13,6 +16,8 @@ import Error404View from "./views/Error404View";
 import HomeView from "./views/HomeView";
 
 function App() {
+  const [usuarioActivo, setUsuarioActivo] = useState(true);
+
   return (
     <>
       <CssBaseline />
@@ -24,14 +29,15 @@ function App() {
           </Route>
           <Route path="/ingreso">
             <LoginView />
-            <FormLogin />
           </Route>
-          <Route path="/profile">
-            <UsersView />
+          <Route path="/usuarios">
+            {usuarioActivo ? <UsersView /> : <Redirect to="/ingreso" />}
           </Route>
-          <Route path="/create-profile">
-            <CreateUserView />
-            <FormSignUp />
+          <Route path="/crear">
+            {usuarioActivo ? <CreateUserView /> : <Redirect to="/ingreso" />}
+          </Route>
+          <Route path="/cerrar-sesion">
+            <HomeView />
           </Route>
           <Route path="*">
             <Error404View />

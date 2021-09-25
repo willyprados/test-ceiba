@@ -44,16 +44,18 @@ export default function MenuApp() {
         <Link to="/">
           <MenuItem>Home</MenuItem>
         </Link>
-        <Link to="/profile">
-          <MenuItem>Profile</MenuItem>
+        <Link to="/usuarios">
+          <MenuItem>Usuarios</MenuItem>
         </Link>
-        <Link to="/create-profile">
-          <MenuItem>Create account</MenuItem>
+        <Link to="/crear">
+          <MenuItem>Crear Cuenta</MenuItem>
         </Link>
-        <Link to="/404">
+        <Link to="/cerrar-sesion">
+          <MenuItem>Cerrar Sesión</MenuItem>
+        </Link>
+        {/* <Link to="/404">
           <MenuItem>Error</MenuItem>
-        </Link>
-        ;
+        </Link> */}
       </Menu>
     </>
   );

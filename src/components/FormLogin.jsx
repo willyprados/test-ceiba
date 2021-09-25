@@ -1,6 +1,7 @@
 import * as React from "react";
 // import Box from "@mui/material/Box";
 // import TextField from "@mui/material/TextField";
+// import { makeStyles } from "@material-ui/styles";
 import { Button, TextField, Box, FormControl } from "@mui/material";
 
 export default function FormPropsTextFields() {
@@ -21,18 +22,18 @@ export default function FormPropsTextFields() {
         <TextField
           required
           id="outlined-required"
-          label="Email"
+          label="Correo"
           type="email"
-          defaultValue="email@example.com"
+          defaultValue="correo@correo.com"
         />
         <TextField
           required
           id="outlined-password-input"
-          label="Password"
+          label="Contraseña"
           type="password"
           autoComplete="current-password"
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Ingresar</Button>
       </FormControl>
     </Box>
   );
