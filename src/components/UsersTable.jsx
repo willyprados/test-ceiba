@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import {
@@ -13,49 +13,23 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-const rows = [
-  {
-    id: 1,
-    email: "george.bluth@reqres.in",
-    first_name: "George",
-    last_name: "Bluth",
-    avatar: "https://reqres.in/img/faces/1-image.jpg",
-  },
-  {
-    id: 2,
-    email: "janet.weaver@reqres.in",
-    first_name: "Janet",
-    last_name: "Weaver",
-    avatar: "https://reqres.in/img/faces/2-image.jpg",
-  },
-  {
-    id: 3,
-    email: "emma.wong@reqres.in",
-    first_name: "Emma",
-    last_name: "Wong",
-    avatar: "https://reqres.in/img/faces/3-image.jpg",
-  },
-];
-
 export default function UsersTable() {
   const url = "https://reqres.in/api/users?page=1";
   const [pages, setPages] = useState(1);
-  const [data, setData] = useState(rows);
-  const APIusers = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
     axios
       .get(url)
       .then(response => {
-        this.data = response.data;
-        console.log(data);
+        const { data, page } = response.data;
+        console.log(data, page);
+        setData(data);
+        setPages(page);
       })
       .catch(err => {
         console.log(err);
       });
-  };
+  }, []);
   // console.log(APIusers());
 
   const handleDeleteUser = id => {
