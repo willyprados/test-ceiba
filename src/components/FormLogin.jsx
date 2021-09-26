@@ -71,6 +71,7 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
         {dataInvalida && <Typography>Datos Invalidos</Typography>}
         <TextField
           required
+          inputProps={{ "data-testid": "login__email" }}
           inputRef={emailRef}
           error={!emailValido}
           onChange={() => {
@@ -80,10 +81,19 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
           id="outlined-required"
           label="Email"
           type="email"
-          helperText={!emailValido ? "Email es requerido" : ""}
+          helperText={
+            !emailValido ? (
+              <span data-testid="alert__text">"Email es requerido"</span>
+            ) : (
+              ""
+            )
+          }
         />
         <TextField
           required
+          inputProps={{
+            "data-testid": "login__password",
+          }}
           inputRef={passRef}
           error={!passValido}
           onChange={() => {
@@ -93,9 +103,17 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
           id="outlined-password-input"
           label="Contraseña"
           type="password"
-          helperText={!passValido ? "Contraseña es requerida" : ""}
+          helperText={
+            !passValido ? (
+              <span data-testid="alert__text">"Contraseña es requerida"</span>
+            ) : (
+              ""
+            )
+          }
         />
-        <Button type="submit">Ingresar</Button>
+        <Button data-testid="login__btn-login" type="submit">
+          Ingresar
+        </Button>
       </FormControl>
     </Box>
   );
