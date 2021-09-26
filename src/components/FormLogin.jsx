@@ -62,7 +62,7 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
       component="form"
       onSubmit={handleSubmit}
       sx={{
-        "& .MuiTextField-root": { m: 1, width: "50ch" },
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
       }}
       noValidate
       autoComplete="off"

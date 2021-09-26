@@ -26,23 +26,25 @@ import LastPageIcon from "@mui/icons-material/LastPage";
 
 export default function UsersTable() {
   const url = "https://reqres.in/api/users";
-  const [pages, setPages] = useState(1);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [data, setData] = useState([]);
   const [deleteUser, setDeleteUser] = useState({});
 
   useEffect(() => {
     axios
-      .get(`${url}?page=1`)
+      .get(`${url}?page=${page}`)
       .then(response => {
-        const { data, page } = response.data;
-        console.log(data, page);
+        const { data, page, total_pages } = response.data;
+        console.log(data, page, total_pages);
         setData(data);
-        setPages(page);
+        setPage(page);
+        setTotalPages(total_pages);
       })
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, [page]);
 
   const APIdelete = user => {
     axios.delete(`${url}/${user.id}`).then(() => {
@@ -121,6 +123,25 @@ export default function UsersTable() {
           </TableBody>
         </Table>
       </TableContainer>
+      <div style={{ display: "flex", justifyContent: "center  " }}>
+        <Button
+          disabled={page <= 1}
+          onClick={() => {
+            setPage(page - 1);
+          }}
+        >
+          Anterior
+        </Button>
+        <p>{`Página #${page}`}</p>
+        <Button
+          disabled={page >= totalPages}
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        >
+          Siguiente
+        </Button>
+      </div>
     </>
   );
 }
