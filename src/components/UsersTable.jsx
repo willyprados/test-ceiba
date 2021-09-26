@@ -10,16 +10,29 @@ import {
   TableRow,
   Paper,
   Button,
+  Alert,
+  AlertTitle,
+  Stack,
+  Box,
+  IconButton,
+  Collapse,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
 
 export default function UsersTable() {
-  const url = "https://reqres.in/api/users?page=1";
+  const url = "https://reqres.in/api/users";
   const [pages, setPages] = useState(1);
   const [data, setData] = useState([]);
+  const [deleteUser, setDeleteUser] = useState({});
+
   useEffect(() => {
     axios
-      .get(url)
+      .get(`${url}?page=1`)
       .then(response => {
         const { data, page } = response.data;
         console.log(data, page);
@@ -30,47 +43,84 @@ export default function UsersTable() {
         console.log(err);
       });
   }, []);
-  // console.log(APIusers());
 
-  const handleDeleteUser = id => {
-    const newData = data.filter(data => data.id !== id);
+  const APIdelete = user => {
+    axios.delete(`${url}/${user.id}`).then(() => {
+      setDeleteUser(user);
+    });
+  };
+  const handleDeleteUser = user => {
+    const newData = data.filter(data => data.id !== user.id);
     setData(newData);
+    APIdelete(user);
     console.log(newData);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">Avatar</TableCell>
-            <TableCell align="right">Nombre</TableCell>
-            <TableCell align="right">Apellido</TableCell>
-            <TableCell align="right">Correo</TableCell>
-            <TableCell align="right">Eliminar</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(row => (
-            <TableRow
-              key={row.id}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell align="right">
-                <img src={row.avatar} alt={`Avatar de ${row.first_name}`} />
-              </TableCell>
-              <TableCell align="right">{row.first_name}</TableCell>
-              <TableCell align="right">{row.last_name}</TableCell>
-              <TableCell align="right">{row.email}</TableCell>
-              <TableCell component="th" scope="row">
-                <Button onClick={() => handleDeleteUser(row.id)}>
-                  <DeleteIcon />
-                </Button>
-              </TableCell>
+    <>
+      <Box sx={{ width: "100%" }}>
+        <Collapse in={Boolean(deleteUser.first_name)}>
+          <Alert
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setDeleteUser({});
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            <AlertTitle>Success</AlertTitle>
+            {`Se elimino el usuario ${deleteUser.first_name} ${deleteUser.last_name}`}
+          </Alert>
+        </Collapse>
+      </Box>
+      <TableContainer component={Paper}>
+        <Table
+          data-testid="users__table"
+          sx={{ minWidth: 650 }}
+          aria-label="simple table"
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell align="right">Avatar</TableCell>
+              <TableCell align="right">Nombre</TableCell>
+              <TableCell align="right">Apellido</TableCell>
+              <TableCell align="right">Correo</TableCell>
+              <TableCell align="right">Eliminar</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.map(row => (
+              <TableRow
+                key={row.id}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell align="right">
+                  <img
+                    data-testid={`user__img-${row.id}`}
+                    src={row.avatar}
+                    alt={`Avatar de ${row.first_name}`}
+                  />
+                </TableCell>
+                <TableCell align="right">{row.first_name}</TableCell>
+                <TableCell align="right">{row.last_name}</TableCell>
+                <TableCell align="right">{row.email}</TableCell>
+                <TableCell component="th" scope="row">
+                  <Button onClick={() => handleDeleteUser(row)}>
+                    <DeleteIcon />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

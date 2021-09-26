@@ -7,11 +7,21 @@
 // un botón por cada página con el número de la página como texto data-testid="users__btn-page-" concatenado con el número de la página
 
 import UsersTable from "../components/UsersTable";
+import { useHistory } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function UsersView() {
+  const history = useHistory();
   return (
     <>
-      <h1>Hola desde UsersView</h1>;
+      <h1 data-testid="users__title">Lista de Usuarios</h1>;
+      <Button
+        data-testid="users__btn-create"
+        onClick={() => history.push("/crear")}
+        style={{ background: "#1976d2", color: "#fff" }}
+      >
+        Crear Usuario
+      </Button>
       <UsersTable />
     </>
   );
