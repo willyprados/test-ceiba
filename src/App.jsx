@@ -22,13 +22,16 @@ function App() {
     <>
       <CssBaseline />
       <Router>
-        <ButtonAppBar />
+        <ButtonAppBar
+          setUsuarioActivo={setUsuarioActivo}
+          usuarioActivo={usuarioActivo}
+        />
         <Switch>
           <Route exact path="/">
             <HomeView />
           </Route>
           <Route path="/ingreso">
-            <LoginView />
+            <LoginView setUsuarioActivo={setUsuarioActivo} />
           </Route>
           <Route path="/usuarios">
             {usuarioActivo ? <UsersView /> : <Redirect to="/ingreso" />}

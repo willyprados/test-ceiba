@@ -5,9 +5,11 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-export default function ButtonAppBar() {
+export default function ButtonAppBar({ setUsuarioActivo, usuarioActivo }) {
+  const history = useHistory();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -16,9 +18,24 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             App Test for Ceiba
           </Typography>
-          <Link to="/ingreso">
-            <Button color="inherit">Ingreso</Button>
-          </Link>
+          {/* <Link to="/ingreso">
+            <Button color="inherit">Ingresar</Button>
+          </Link> */}
+          {usuarioActivo ? (
+            <Button
+              onClick={() => setUsuarioActivo(false)}
+              style={{ background: "#fff" }}
+            >
+              Cerrar Sesión
+            </Button>
+          ) : (
+            <Button
+              onClick={() => history.push("/ingreso")}
+              style={{ background: "#fff" }}
+            >
+              Ingresar
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

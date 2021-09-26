@@ -8,11 +8,11 @@
 
 import FormLogin from "../components/FormLogin";
 
-export default function LoginView() {
+export default function LoginView({ setUsuarioActivo }) {
   return (
     <>
       <h1>Hola desde LoginView</h1>;
-      <FormLogin />
+      <FormLogin setUsuarioActivo={setUsuarioActivo} />
     </>
   );
 }
