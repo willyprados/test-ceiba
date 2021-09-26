@@ -6,6 +6,13 @@
 // botón que redirecciona a la vista de crear nuevo usuario  data-testid="users__btn-create"
 // un botón por cada página con el número de la página como texto data-testid="users__btn-page-" concatenado con el número de la página
 
+import UsersTable from "../components/UsersTable";
+
 export default function UsersView() {
-  return <h1>Hola desde UsersView</h1>;
+  return (
+    <>
+      <h1>Hola desde UsersView</h1>;
+      <UsersTable />
+    </>
+  );
 }
