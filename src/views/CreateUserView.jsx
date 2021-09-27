@@ -5,13 +5,13 @@
 // Span que alerta con notificaciones=“alert__text”
 // Botón para crear= “create__btn”
 
-import FormSignUp from "../components/FormSignUp";
+import FormCreateUser from "../components/FormCreateUser";
 
 export default function CreateUserView() {
   return (
     <>
-      <h1>Hola desde CreateUserView</h1>;
-      <FormSignUp />
+      <h1 data-testid="create__title">Hola desde CreateUserView</h1>;
+      <FormCreateUser />
     </>
   );
 }
