@@ -10,7 +10,7 @@ import FormCreateUser from "../components/FormCreateUser";
 export default function CreateUserView() {
   return (
     <>
-      <h1 data-testid="create__title">Hola desde CreateUserView</h1>;
+      <h1 data-testid="create__title">Crear usuario</h1>;
       <FormCreateUser />
     </>
   );

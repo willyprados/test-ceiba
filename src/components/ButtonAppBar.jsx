@@ -1,11 +1,6 @@
-import * as React from "react";
+import { useHistory } from "react-router-dom";
+import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
 import MenuApp from "./MenuApp";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import { Link, useHistory } from "react-router-dom";
 
 export default function ButtonAppBar({ setUsuarioActivo, usuarioActivo }) {
   const history = useHistory();
@@ -16,20 +11,22 @@ export default function ButtonAppBar({ setUsuarioActivo, usuarioActivo }) {
         <Toolbar>
           <MenuApp />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            App Test for Ceiba
+            Test Ceiba
           </Typography>
-          {/* <Link to="/ingreso">
-            <Button color="inherit">Ingresar</Button>
-          </Link> */}
           {usuarioActivo ? (
             <Button
-              onClick={() => setUsuarioActivo(false)}
+              data-testid="header__link-signout"
+              onClick={() => {
+                setUsuarioActivo(false);
+                history.push("/ingreso");
+              }}
               style={{ background: "#fff" }}
             >
               Cerrar Sesión
             </Button>
           ) : (
             <Button
+              data-testid="header__link-login"
               onClick={() => history.push("/ingreso")}
               style={{ background: "#fff" }}
             >

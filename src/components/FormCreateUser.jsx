@@ -13,13 +13,13 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function FormCreateUser() {
-  const urlCreate = "https://reqres.in/api/users";
   const [dataInvalida, setDataInvalida] = useState(false);
   const [nameValido, setNameValido] = useState(true);
   const [jobValido, setJobValido] = useState(true);
   const [usuarioCreado, setUsuarioCreado] = useState({});
   const nameRef = useRef();
   const jobRef = useRef();
+  const urlCreate = "https://reqres.in/api/users";
 
   const APIcreate = (name, job) => {
     axios
@@ -30,30 +30,29 @@ export default function FormCreateUser() {
       .then(response => {
         const usuario = response.data;
         setUsuarioCreado(usuario);
-        console.log(usuario);
       })
-      .catch(er => {
+      .catch(() => {
         setDataInvalida(true);
         setNameValido(false);
         setJobValido(false);
       });
   };
+
   const handleSubmit = e => {
     e.preventDefault();
     const name = nameRef.current.value;
     const job = jobRef.current.value;
-    console.log(name, job);
     if (name === "") {
       setNameValido(false);
     }
     if (job === "") {
       setJobValido(false);
     }
-
     if (name !== "" && job !== "") {
       APIcreate(name, job);
     }
   };
+
   return (
     <>
       <Box sx={{ width: "100%" }}>
@@ -73,7 +72,7 @@ export default function FormCreateUser() {
             }
             sx={{ mb: 2 }}
           >
-            <AlertTitle>Success</AlertTitle>
+            <AlertTitle>Creado exitosamente 🎉</AlertTitle>
             <span data-testid="alert__text">
               {`Se creo el usuario ${usuarioCreado.name} con id:${usuarioCreado.id}`}
             </span>
@@ -129,7 +128,11 @@ export default function FormCreateUser() {
               )
             }
           />
-          <Button data-testid="create__btn" type="submit">
+          <Button
+            style={{ background: "#1976d2", color: "#fff" }}
+            data-testid="create__btn"
+            type="submit"
+          >
             Crear Usuario
           </Button>
         </FormControl>

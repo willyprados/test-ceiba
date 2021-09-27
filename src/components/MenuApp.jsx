@@ -1,17 +1,16 @@
-import * as React from "react";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, MenuItem, IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 export default function MenuApp() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -42,20 +41,14 @@ export default function MenuApp() {
         }}
       >
         <Link to="/">
-          <MenuItem>Home</MenuItem>
+          <MenuItem>Inicio</MenuItem>
         </Link>
-        <Link to="/usuarios">
+        <Link data-testid="header__link-users" to="/usuarios">
           <MenuItem>Usuarios</MenuItem>
         </Link>
-        <Link to="/crear">
-          <MenuItem>Crear Cuenta</MenuItem>
+        <Link data-testid="header__link-create" to="/crear">
+          <MenuItem>Crear usuario</MenuItem>
         </Link>
-        <Link to="/cerrar-sesion">
-          <MenuItem>Cerrar Sesión</MenuItem>
-        </Link>
-        {/* <Link to="/404">
-          <MenuItem>Error</MenuItem>
-        </Link> */}
       </Menu>
     </>
   );

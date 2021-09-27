@@ -1,3 +1,3 @@
 export default function HomeView() {
-  return <h1>Hola desde HomeView</h1>;
+  return <h1>Bienvenido a la prueba de Willy ✌🏼</h1>;
 }

@@ -11,7 +11,7 @@ import FormLogin from "../components/FormLogin";
 export default function LoginView({ setUsuarioActivo }) {
   return (
     <>
-      <h1 data-testid="login__title">Hola desde LoginView</h1>;
+      <h1 data-testid="login__title">Ingreso de usuario</h1>;
       <FormLogin setUsuarioActivo={setUsuarioActivo} />
     </>
   );

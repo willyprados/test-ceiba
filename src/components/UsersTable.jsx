@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-
 import {
   Table,
   TableBody,
@@ -12,37 +11,31 @@ import {
   Button,
   Alert,
   AlertTitle,
-  Stack,
   Box,
   IconButton,
   Collapse,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
-import FirstPageIcon from "@mui/icons-material/FirstPage";
-import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import LastPageIcon from "@mui/icons-material/LastPage";
 
 export default function UsersTable() {
-  const url = "https://reqres.in/api/users";
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [data, setData] = useState([]);
   const [deleteUser, setDeleteUser] = useState({});
+  const url = "https://reqres.in/api/users";
 
   useEffect(() => {
     axios
       .get(`${url}?page=${page}`)
       .then(response => {
         const { data, page, total_pages } = response.data;
-        console.log(data, page, total_pages);
         setData(data);
         setPage(page);
         setTotalPages(total_pages);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        setData([]);
       });
   }, [page]);
 
@@ -51,11 +44,11 @@ export default function UsersTable() {
       setDeleteUser(user);
     });
   };
+
   const handleDeleteUser = user => {
     const newData = data.filter(data => data.id !== user.id);
     setData(newData);
     APIdelete(user);
-    console.log(newData);
   };
 
   return (
@@ -77,7 +70,7 @@ export default function UsersTable() {
             }
             sx={{ mb: 2 }}
           >
-            <AlertTitle>Success</AlertTitle>
+            <AlertTitle>Eliminado exitosamente 🎉</AlertTitle>
             {`Se elimino el usuario ${deleteUser.first_name} ${deleteUser.last_name}`}
           </Alert>
         </Collapse>
@@ -90,11 +83,11 @@ export default function UsersTable() {
         >
           <TableHead>
             <TableRow>
-              <TableCell align="right">Avatar</TableCell>
-              <TableCell align="right">Nombre</TableCell>
-              <TableCell align="right">Apellido</TableCell>
-              <TableCell align="right">Correo</TableCell>
-              <TableCell align="right">Eliminar</TableCell>
+              <TableCell align="center">Avatar</TableCell>
+              <TableCell align="center">Nombre</TableCell>
+              <TableCell align="center">Apellido</TableCell>
+              <TableCell align="center">Correo</TableCell>
+              <TableCell align="center">Eliminar</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -103,17 +96,18 @@ export default function UsersTable() {
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell align="right">
+                <TableCell align="center">
                   <img
+                    style={{ width: "64px", borderRadius: "50%" }}
                     data-testid={`user__img-${row.id}`}
                     src={row.avatar}
                     alt={`Avatar de ${row.first_name}`}
                   />
                 </TableCell>
-                <TableCell align="right">{row.first_name}</TableCell>
-                <TableCell align="right">{row.last_name}</TableCell>
-                <TableCell align="right">{row.email}</TableCell>
-                <TableCell component="th" scope="row">
+                <TableCell align="center">{row.first_name}</TableCell>
+                <TableCell align="center">{row.last_name}</TableCell>
+                <TableCell align="center">{row.email}</TableCell>
+                <TableCell align="center" component="th" scope="row">
                   <Button onClick={() => handleDeleteUser(row)}>
                     <DeleteIcon />
                   </Button>
@@ -123,7 +117,7 @@ export default function UsersTable() {
           </TableBody>
         </Table>
       </TableContainer>
-      <div style={{ display: "flex", justifyContent: "center  " }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <Button
           disabled={page <= 1}
           onClick={() => {
@@ -132,7 +126,7 @@ export default function UsersTable() {
         >
           Anterior
         </Button>
-        <p>{`Página #${page}`}</p>
+        <p>{`Página ${page}`}</p>
         <Button
           disabled={page >= totalPages}
           onClick={() => {

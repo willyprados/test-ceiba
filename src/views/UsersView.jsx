@@ -18,7 +18,7 @@ export default function UsersView() {
       <Button
         data-testid="users__btn-create"
         onClick={() => history.push("/crear")}
-        style={{ background: "#1976d2", color: "#fff" }}
+        style={{ background: "#1976d2", color: "#fff", marginBottom: "5%" }}
       >
         Crear Usuario
       </Button>

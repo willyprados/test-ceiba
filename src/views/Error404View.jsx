@@ -4,7 +4,7 @@
 export default function Error404View() {
   return (
     <>
-      <h1 titulo="error404__title">Error 404</h1>
+      <h1 data-testid="error404__title">Error 404</h1>
       <span>No encontramos esta página</span>
     </>
   );

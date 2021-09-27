@@ -1,20 +1,16 @@
 import { useState, useRef } from "react";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-// import Box from "@mui/material/Box";
-// import TextField from "@mui/material/TextField";
-// import { makeStyles } from "@material-ui/styles";
+import { useHistory } from "react-router-dom";
 import { Button, TextField, Box, FormControl, Typography } from "@mui/material";
 
 export default function FormPropsTextFields({ setUsuarioActivo }) {
-  const baseURL = "https://reqres.in/api/login";
   const history = useHistory();
-
   const [dataInvalida, setDataInvalida] = useState(false);
   const [emailValido, setEmailValido] = useState(true);
   const [passValido, setPassValido] = useState(true);
   const emailRef = useRef();
   const passRef = useRef();
+  const baseURL = "https://reqres.in/api/login";
 
   const APIlogin = (email, password) => {
     axios
@@ -24,13 +20,12 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
       })
       .then(response => {
         const { token = "" } = response.data;
-        console.log(token);
         if (token !== "") {
           setUsuarioActivo(true);
           history.push("/");
         }
       })
-      .catch(er => {
+      .catch(() => {
         setDataInvalida(true);
         setEmailValido(false);
         setPassValido(false);
@@ -41,20 +36,15 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
     e.preventDefault();
     const email = emailRef.current.value;
     const pass = passRef.current.value;
-
     if (email === "") {
       setEmailValido(false);
     }
     if (pass === "") {
       setPassValido(false);
     }
-
     if (email !== "" && pass !== "") {
       APIlogin(email, pass);
     }
-
-    console.log(emailRef.current.value);
-    console.log(passRef.current.value);
   };
 
   return (
@@ -68,7 +58,7 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
       autoComplete="off"
     >
       <FormControl>
-        {dataInvalida && <Typography>Datos Invalidos</Typography>}
+        {dataInvalida && <Typography>Datos Invalidos ❌</Typography>}
         <TextField
           required
           inputProps={{ "data-testid": "login__email" }}
@@ -78,7 +68,6 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
             setEmailValido(true);
             setDataInvalida(false);
           }}
-          id="outlined-required"
           label="Email"
           type="email"
           helperText={
@@ -100,7 +89,6 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
             setPassValido(true);
             setDataInvalida(false);
           }}
-          id="outlined-password-input"
           label="Contraseña"
           type="password"
           helperText={
@@ -111,7 +99,11 @@ export default function FormPropsTextFields({ setUsuarioActivo }) {
             )
           }
         />
-        <Button data-testid="login__btn-login" type="submit">
+        <Button
+          style={{ background: "#1976d2", color: "#fff" }}
+          data-testid="login__btn-login"
+          type="submit"
+        >
           Ingresar
         </Button>
       </FormControl>
