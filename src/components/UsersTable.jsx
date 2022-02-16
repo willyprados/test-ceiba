@@ -70,7 +70,7 @@ export default function UsersTable() {
             }
             sx={{ mb: 2 }}
           >
-            <AlertTitle>Eliminado exitosamente 🎉</AlertTitle>
+            <AlertTitle>Eliminado exitosamente ✅</AlertTitle>
             {`Se elimino el usuario ${deleteUser.first_name} ${deleteUser.last_name}`}
           </Alert>
         </Collapse>

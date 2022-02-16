@@ -89,7 +89,7 @@ export default function FormCreateUser() {
         autoComplete="off"
       >
         <FormControl>
-          {dataInvalida && <Typography>Datos Invalidos</Typography>}
+          {dataInvalida && <Typography>Datos Invalidos ❌</Typography>}
           <TextField
             onChange={() => {
               setNameValido(true);

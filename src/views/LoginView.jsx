@@ -11,7 +11,8 @@ import FormLogin from "../components/FormLogin";
 export default function LoginView({ setUsuarioActivo }) {
   return (
     <>
-      <h1 data-testid="login__title">Ingreso de usuario</h1>;
+      <h1 data-testid="login__title">Ingreso de usuario</h1>
+      <p>Para ingresar usa el siguiente email: eve.holt@reqres.in<br>Para la contraseña, usa cualquier valor</p>
       <FormLogin setUsuarioActivo={setUsuarioActivo} />
     </>
   );

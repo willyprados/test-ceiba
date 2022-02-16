@@ -14,7 +14,7 @@ export default function UsersView() {
   const history = useHistory();
   return (
     <>
-      <h1 data-testid="users__title">Lista de Usuarios</h1>;
+      <h1 data-testid="users__title">Lista de Usuarios</h1>
       <Button
         data-testid="users__btn-create"
         onClick={() => history.push("/crear")}
