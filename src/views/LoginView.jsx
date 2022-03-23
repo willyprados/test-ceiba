@@ -12,7 +12,10 @@ export default function LoginView({ setUsuarioActivo }) {
   return (
     <>
       <h1 data-testid="login__title">Ingreso de usuario</h1>
-      <p>Para ingresar usa el siguiente email: eve.holt@reqres.in<br>Para la contraseña, usa cualquier valor</p>
+      <p style={{ display: block }}>
+        <span>Para ingresar usa el siguiente email: eve.holt@reqres.in</span>
+        <span>Para la contraseña, usa cualquier valor</span>
+      </p>
       <FormLogin setUsuarioActivo={setUsuarioActivo} />
     </>
   );
